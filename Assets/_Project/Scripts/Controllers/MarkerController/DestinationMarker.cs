@@ -2,33 +2,47 @@ using UnityEngine;
 
 public class DestinationMarker : MonoBehaviour
 {
-    private Transform _marker;
-    private Transform _playerTransform;
+    [SerializeField] private Transform _marker;
+    [SerializeField] private float _collectionDistance = 0.5f;
 
-    private const float CollectionDistance = 0.5f;
+    private IMovable _movable;
 
-    public void Initialize(Transform marker, Transform playerTransform)
+    private Vector3 _targetPosition;
+
+    public void Initialize(IMovable movable)
     {
-        _marker = marker;
-        _playerTransform = playerTransform;
+        _movable = movable;
+
+        _targetPosition = _movable.CurrentPosition;
         DisableMarker();
     }
 
-    private void Update()
+    public void Update()
     {
+
+        if (_targetPosition != _movable.CurrentPositionTarget)
+        {
+            SetMarkerPosition();
+            EnableMarker();
+        }
+
         if (IsTargetReached())
+        {
             DisableMarker();
+        }
     }
 
-    public void SetMarkerPosition(Vector3 targetPoint)
+    private void SetMarkerPosition()
     {
+        _marker.transform.position = _movable.CurrentPositionTarget;
+        _targetPosition = _movable.CurrentPositionTarget;
+
         EnableMarker();
-        _marker.transform.position = targetPoint;
     }
 
     private void EnableMarker() => _marker.gameObject.SetActive(true);
 
     private void DisableMarker() => _marker.gameObject.SetActive(false);
 
-    private bool IsTargetReached() => Vector3.Distance(_playerTransform.position, _marker.transform.position) <= CollectionDistance;
+    private bool IsTargetReached() => (_marker.transform.position - _movable.CurrentPosition).magnitude <= _collectionDistance;
 }
