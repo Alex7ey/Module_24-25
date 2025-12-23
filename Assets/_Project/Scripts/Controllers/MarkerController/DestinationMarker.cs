@@ -1,20 +1,20 @@
 using UnityEngine;
 
-public class DestinationMarkerController : Controller
+public class DestinationMarker : MonoBehaviour
 {
-    private readonly GameObject _marker;
-    private readonly Transform _playerTransform;
+    private Transform _marker;
+    private Transform _playerTransform;
 
     private const float CollectionDistance = 0.5f;
 
-    public DestinationMarkerController(GameObject marker, Transform playerTransform)
+    public void Initialize(Transform marker, Transform playerTransform)
     {
         _marker = marker;
         _playerTransform = playerTransform;
         DisableMarker();
     }
 
-    protected override void UpdateLogic(float deltaTime)
+    private void Update()
     {
         if (IsTargetReached())
             DisableMarker();
@@ -26,10 +26,9 @@ public class DestinationMarkerController : Controller
         _marker.transform.position = targetPoint;
     }
 
+    private void EnableMarker() => _marker.gameObject.SetActive(true);
 
-    private void EnableMarker() => _marker.SetActive(true);
-
-    private void DisableMarker() => _marker.SetActive(false);
+    private void DisableMarker() => _marker.gameObject.SetActive(false);
 
     private bool IsTargetReached() => Vector3.Distance(_playerTransform.position, _marker.transform.position) <= CollectionDistance;
 }

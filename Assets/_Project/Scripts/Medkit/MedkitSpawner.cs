@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MedkitSpawner : MonoBehaviour
@@ -8,29 +6,15 @@ public class MedkitSpawner : MonoBehaviour
     [SerializeField] private float _spawnCooldown;
     [SerializeField] private float _radius = 3;
     [SerializeField] private Medkit _medKit;
-<<<<<<< HEAD
     [SerializeField] private Transform _targetPosition;
 
     private bool _isActive;
     private Coroutine _coroutine;
-=======
-//<<<<<<< Updated upstream
-//    [SerializeField] private Transform _targetPosition;
-
-//    private bool _isActive;
-//    private Coroutine _coroutine;
-////=======
-
-    private bool _isActive;
-    private Coroutine _coroutine;
-    private Transform _targetPosition;
 
     public void Initialize(Transform transform)
     {
         _targetPosition = transform;
     }
-//>>>>>>> Stashed changes
->>>>>>> parent of e325804 (123)
 
     private void Update()
     {
@@ -59,14 +43,6 @@ public class MedkitSpawner : MonoBehaviour
     private void Spawn()
     {
         Vector3 spawnPosition = _targetPosition.position + GetSpawnPosition();
-<<<<<<< HEAD
-
-=======
-//<<<<<<< Updated upstream
-
-//=======
-//>>>>>>> Stashed changes
->>>>>>> parent of e325804 (123)
         Instantiate(_medKit, spawnPosition, Quaternion.identity, transform);
     }
 
