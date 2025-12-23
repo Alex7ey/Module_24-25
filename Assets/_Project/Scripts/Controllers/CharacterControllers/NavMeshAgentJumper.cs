@@ -34,10 +34,12 @@ public class NavMeshAgentJumper
     private IEnumerator JumpProcess(OffMeshLinkData offMeshLink, Vector3 targetPoint)
     {
         _agent.isStopped = true;
+
         Vector3 direction = (targetPoint - _agent.transform.position).normalized;
+        float jumpDistance = Vector3.Distance(offMeshLink.startPos, offMeshLink.endPos);
 
         Vector3 startPos = _agent.transform.position;
-        Vector3 endPos = _agent.transform.position + (direction * Vector3.Distance(offMeshLink.startPos, offMeshLink.endPos));
+        Vector3 endPos = _agent.transform.position + (direction * jumpDistance);
 
         float progress = 0f;
         float duration = Vector3.Distance(startPos, endPos) / _jumpSpeed;

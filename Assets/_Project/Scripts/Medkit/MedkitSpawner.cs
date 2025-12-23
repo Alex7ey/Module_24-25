@@ -6,10 +6,10 @@ public class MedkitSpawner : MonoBehaviour
     [SerializeField] private float _spawnCooldown;
     [SerializeField] private float _radius = 3;
     [SerializeField] private Medkit _medKit;
-    [SerializeField] private Transform _targetPosition;
 
     private bool _isActive;
     private Coroutine _coroutine;
+    private Transform _targetPosition;
 
     public void Initialize(Transform transform)
     {

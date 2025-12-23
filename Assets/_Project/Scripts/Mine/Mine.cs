@@ -1,13 +1,13 @@
 using UnityEngine;
-
+[RequireComponent (typeof(SphereCollider))]
 public class Mine : MonoBehaviour
 {
-    [SerializeField] private float _detectionRadius;
     [SerializeField] private float _timeBeforeExplosion;
     [SerializeField] private int _damage;
     [SerializeField] private ParticleSystem _explosionEffect;
     [SerializeField] private AudioClip _explosionSound;
 
+    private float _detectionRadius;
     private Explosion _explosion;
 
     public void Detected()
@@ -17,11 +17,7 @@ public class Mine : MonoBehaviour
 
     private void Awake()
     {
-        InitializeControllers();
-    }
-
-    private void InitializeControllers()
-    {
+        _detectionRadius = GetComponent<SphereCollider>().radius * transform.localScale.x;
         _explosion = new(_timeBeforeExplosion, transform, _detectionRadius, _explosionEffect, _damage, this, _explosionSound);
     }
 

@@ -48,10 +48,8 @@ public class TargetToPointRotator
     {
         _agent.CalculatePath(_lookAtPosition, _path);
 
-        if (_path.corners.Length > 0)
-        {
+        if (_path.corners.Length > 1)
             return _path.corners[1];
-        }
 
         return _lookAtPosition;
     }

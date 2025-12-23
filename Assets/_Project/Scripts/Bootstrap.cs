@@ -9,14 +9,14 @@ using UnityEngine.TextCore.Text;
 public class Bootstrap : MonoBehaviour
 {
     [SerializeField] private Character _characterPrefab;
-    //[SerializeField] private HealthBar _healthBar;
+    [SerializeField] private HealthBar _healthBar;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private CinemachineVirtualCamera _virtualCamera;
     [SerializeField] private DestinationMarker _destinationMarker;
     [SerializeField] private ManagerControllers _managerControllers;// название по лучше бы придумать
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioMixer _audioMixer;
-    //[SerializeField] private MedkitSpawner _medkitSpawner;
+    [SerializeField] private MedkitSpawner _medkitSpawner;
 
     private void Awake()
     {
@@ -31,10 +31,10 @@ public class Bootstrap : MonoBehaviour
     private void InitializeComponents(ViewCharacter viewCharacter, Character character)
     {
         viewCharacter.Initialize(character);
-        //_healthBar.Initialize(character);
+        _healthBar.Initialize(character);
         _destinationMarker.Initialize(character);
         _virtualCamera.Follow = character.transform;
-        //_medkitSpawner.Initialize(character.transform);
+        _medkitSpawner.Initialize(character.transform);
         _managerControllers.Initialize(new PointClickMovementController(character), new NavMeshAgentJumpController(character, character.GetComponent<NavMeshAgent>()));
     }
 }

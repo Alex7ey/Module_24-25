@@ -13,7 +13,7 @@ public class Health
     }
 
     public bool IsAlive => _currentHealth > 0;
-    public bool IsTakeDamage { get; private set; }
+
     public int CurrentHealth => _currentHealth;
 
     public void TakeDamage(int damage)
@@ -28,8 +28,6 @@ public class Health
             _currentHealth = 0;
             return;
         }
-
-        IsTakeDamage = true;
     }
 
     public void AddHealth(int health)
