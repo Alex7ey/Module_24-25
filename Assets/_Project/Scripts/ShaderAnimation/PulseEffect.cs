@@ -15,45 +15,24 @@ public class PulseEffect
         _coroutineRunner = coroutineRunner;
     }
 
-    public Coroutine StartPulseAnimation(float minValue, float maxValue, float animationSpeed)
+    public Coroutine StartPulseAnimation(float minValue = 1, float maxValue = 2, float animationSpeed = 2)
     {
-        return _coroutineRunner.StartCoroutine(CustomPingPong(minValue, maxValue, animationSpeed));
+        return _coroutineRunner.StartCoroutine(ProcessAnimation(minValue, maxValue, animationSpeed));
     }
 
-    private IEnumerator CustomPingPong(float minValue, float maxValue, float animationSpeed)
+    private IEnumerator ProcessAnimation(float minValue, float maxValue, float animationSpeed)
     {
-        float range = maxValue - minValue;
-        float duration = range / animationSpeed;
-
-        float elapsedTime = 0f;
+        float elapsedTime = 0;
 
         while (true)
         {
-            while (elapsedTime < duration)
-            {
-                float percent = elapsedTime / duration;
-                float result = Mathf.Lerp(minValue, maxValue, percent);
+            elapsedTime += Time.deltaTime * animationSpeed;
 
-                elapsedTime += Time.deltaTime;
+            float percent = Mathf.PingPong(elapsedTime, 1);
+            float value = Mathf.Lerp(minValue, maxValue, percent);
 
-                ApplyMaterialValues(result, percent);
+            ApplyMaterialValues(value, percent);
 
-                yield return null;
-            }
-
-            while (elapsedTime > 0)
-            {
-                float percent = elapsedTime / duration;
-                float result = Mathf.Lerp(minValue, maxValue, percent);
-
-                elapsedTime -= Time.deltaTime;
-
-                ApplyMaterialValues(result, percent);
-
-                yield return null;
-            }
-
-            elapsedTime = 0f;
             yield return null;
         }
     }

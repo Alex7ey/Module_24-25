@@ -1,4 +1,6 @@
 using Cinemachine;
+using Unity.AI.Navigation;
+using UnityEditor.AI;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Audio;

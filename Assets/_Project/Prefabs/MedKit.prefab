@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ce033bffe28ac439556a9d8aede3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healAmount: 2
+  _healAmount: 1
 --- !u!135 &8343056472596572547
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -132,6 +132,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f46626e346cdba41ab100ebc0a3c5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scaleFactor: 1
-  _colorFactor: 10
-  _animationSpeed: 3

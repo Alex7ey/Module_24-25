@@ -22,8 +22,11 @@ public class CharacterView : MonoBehaviour
     private void Awake()
     {
         _dissolveEffect = new(GetComponentsInChildren<SkinnedMeshRenderer>(), this, _dissolveSpeed);
+
         _animator = GetComponent<Animator>();
+
         _character = GetComponentInParent<Character>();
+        _currentHealth = _character.CurrentHealth;
     }
 
     private void Update()
@@ -57,7 +60,7 @@ public class CharacterView : MonoBehaviour
     }
 
     private bool IsTakeDamage()
-    {
+    {   
         if (_character.CurrentHealth < _currentHealth)
         {
             _currentHealth = _character.CurrentHealth;
